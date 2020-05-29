@@ -1,0 +1,21 @@
+version: "2"
+
+services:
+  grafana:
+    image: grafana/grafana:5.1.0
+    ports:
+      - 3000:3000
+    environment: 
+      - GF_INSTALL_PLUGINS=grafana-piechart-panel
+      - GF_PLUGIN_DIR=/plugins
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ./config:/prometheus
+      - ./data/prometheus:/data
+    command:
+      - '--config.file=/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/data'
+    ports:
+      - 9090:9090
+    restart: always
