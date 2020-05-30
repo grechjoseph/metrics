@@ -17,6 +17,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class TestController {
 
     private final MeterRegistry meterRegistry;
+    private final Counter longCounter;
+    private final Counter shortCounter;
 
     private String info;
 
@@ -28,18 +30,6 @@ public class TestController {
     @PostMapping("/info")
     public void postInfo(@RequestBody final String info) {
         this.info = info;
-
-        // Custom Counter metrics.
-        final Counter longCounter = Counter.builder("info.submissions")
-                .tag("length", "long")
-                .description("Counter for long info.")
-                .register(meterRegistry);
-
-        final Counter shortCounter = Counter.builder("info.submissions")
-                .tag("length", "short")
-                .description("Counter for short info.")
-                .register(meterRegistry);
-
 
         if(info.length() > 10) {
             longCounter.increment();
