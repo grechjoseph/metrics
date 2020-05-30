@@ -39,14 +39,14 @@ Select Add Data Source and provide:
 <li>
 In the expression field, provide: rate(http_server_requests_seconds_count{job="metrics-service"}[5m])
     <ul>
-    <li>rate(...): The Grafana function to use.</li>
+    <li>rate(...): The function to use.</li>
     <li>http_server_requests_seconds_count: The metrics dimension to use.</li>
     <li>job: If we had multiple services, this would single out metrics for the service marked as job="metrics-service" in the properties.yml file done before.</li>
     <li>[5m]: "per-second rate of HTTP requests as measured over the last 5 minutes"</li>
-    <li>NOTE: what's inside the curly brackets is PromQL.</li>
+    <li>NOTE: The query is in PromQL.</li>
     </ul>
 </li>
-<li>For the legend format, provde the following to make legens have a better aesthetic: {{method}} - {{uri}} - {{status}}</li>
+<li>For the legend format, provide the following to make legends have a better aesthetic: {{method}} - {{uri}} - {{status}}</li>
 <li>Unfocus all text field and ensure the Graph is updated.</li>
 <li>From the top right Menu, you may click the Last 6 hours button, and from the dropdown, set Refreshing ever to 5s, and press Apply. This will have th graph update every five seconds.</li>
 <li>Once ready, click the Save icon from the top right menu, and name the Graph 'Requests Seconds Count'.</li>
@@ -57,3 +57,26 @@ In the expression field, provide: rate(http_server_requests_seconds_count{job="m
 <ul>
 <li>rate(http_server_requests_seconds_count{job = "metrics-service",uri !~ "/actuato.+"}[5m]): Exclude requests made to /actuator/*</li>
 </ul>
+
+<h2>Custom Counter Metric</h2>
+final Counter longCounter = Counter.builder("info.submissions")
+                .tag("length", "long")
+                .description("Counter for long info.")
+                .register(meterRegistry);
+
+final Counter shortCounter = Counter.builder("info.submissions")
+        .tag("length", "short")
+        .description("Counter for short info.")
+        .register(meterRegistry);
+
+
+if(info.length() > 10) {
+    longCounter.increment();
+} else {
+    shortCounter.increment();
+}
+
+<h2>Custom Gauage Metric</h2>
+Gauge.builder("info.length", () -> new AtomicInteger(this.info.length()).get())
+                .strongReference(true)
+                .register(meterRegistry);

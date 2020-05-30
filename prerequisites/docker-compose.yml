@@ -6,7 +6,7 @@ services:
     ports:
       - 3000:3000
     environment: 
-      - GF_INSTALL_PLUGINS=grafana-piechart-panel
+      - GF_INSTALL_PLUGINS=grafana-piechart-panel,briangann-gauge-panel
       - GF_PLUGIN_DIR=/plugins
   prometheus:
     image: prom/prometheus
