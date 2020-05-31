@@ -56,6 +56,10 @@ In the expression field, provide: rate(http_server_requests_seconds_count{job="m
 <h2>Example Queries</h2>
 <ul>
 <li>rate(http_server_requests_seconds_count{job = "metrics-service",uri !~ "/actuato.+"}[5m]): Exclude requests made to /actuator/*</li>
+<li>sum (http_server_requests_seconds_count{uri!~"/actuato.+", status="404"})
+    / 
+    sum (http_server_requests_seconds_count{uri!~"/actuato.+"})
+    * 100</li>
 </ul>
 
 <h2>Custom Counter Metric</h2>
