@@ -60,6 +60,7 @@ In the expression field, provide: rate(http_server_requests_seconds_count{job="m
     / 
     sum (http_server_requests_seconds_count{uri!~"/actuato.+"})
     * 100</li>
+<li>sum by (status) (rate(items_total{methodName = "getItemById"}[30m])): Group by tag 'status'</li>
 </ul>
 
 <h2>Custom Counter Metric</h2>
