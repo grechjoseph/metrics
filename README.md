@@ -13,7 +13,7 @@
 <ol>
 <li>Ensure docker-compose has been ran as described above.</li>
 <li>Navigate to <a href="localhost:9090/graph">localhost:9090/graph</a>.</li>
-<li>Once the page loads, provide "http_server_requests_seconds_count" in the query text field, and press 'Execute'.</li>
+<li>Once the page loads, provide "http_server_requests_seconds_count" in the query text field, and press <b>Execute</b>.</li>
 <li>In the console, a list of the retrieved metrics from the service should be obtained.</li>
 <li>Switch to <a href="http://localhost:9090/graph?g0.range_input=1h&g0.expr=http_server_requests_seconds_count&g0.tab=0">Graph</a> instead of Console.</li>
 <li>The Graph should be active with metrics showing.</li>
@@ -34,7 +34,7 @@ Select Add Data Source and provide:
 <li>Click <b>Save & Test</b> and verify that no errors are encountered.</li>
 <li>From the Side Menu, select <b>Dashboard</b> -> <b>Home</b>, and click the <b>New Dashboard</b> button.</li>
 <li>Select <b>Graph</b>.</li>
-<li>Press the Graph's title and select <b>Edit</b>.</li>
+<li>Click the Graph's title and select <b>Edit</b>.</li>
 <li>For data source, provide 'prometheus-local' (or Default if this was set to default).</li>
 <li>
 In the expression field, provide: <b>rate(http_server_requests_seconds_count{job="metrics-service"}[5m])</b>
@@ -48,7 +48,7 @@ In the expression field, provide: <b>rate(http_server_requests_seconds_count{job
 </li>
 <li>For the legend format, provide the following to make legends have a better aesthetic: <b>{{method}} - {{uri}} - {{status}}</b></li>
 <li>Unfocus all text field and ensure the Graph is updated.</li>
-<li>From the top right Menu, you may click the <b>Last 6 hours</b> button, and from the dropdown, set <b>Refreshing every</b> to <b>5s</b>, and press <b>Apply</b>. This will have th graph update every five seconds.</li>
+<li>From the top right Menu, you may click the <b>Last 6 hours</b> button, and from the dropdown, set <b>Refreshing every</b> to <b>5s</b>, and click <b>Apply</b>. This will have th graph update every five seconds.</li>
 <li>Once ready, click the <b>Save</b> icon from the top right menu, and name the Graph 'Requests Seconds Count'.</li>
 <li>Once back out at the Dashboard, click <b>Save</b> from the top right menu, and name the Dashboard 'Requests Dashboard'.</li>
 </ol>
