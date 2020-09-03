@@ -61,8 +61,7 @@ In the expression field, provide: <b>rate(http_server_requests_seconds_count{job
 </ul>
 
 <h2>Custom Counter Metric</h2>
-``` java
-{%
+```java
 final Counter longCounter = Counter.builder("info.submissions")
                 .tag("length", "long")
                 .description("Counter for long info.")
@@ -78,10 +77,9 @@ if(info.length() > 10) {
 } else {
     shortCounter.increment();
 }
-%}
 ```
 <h2>Custom Gauage Metric</h2>
-``` java
+```java
 Gauge.builder("info.length", () -> new AtomicInteger(this.info.length()).get())
                 .strongReference(true)
                 .register(meterRegistry);
